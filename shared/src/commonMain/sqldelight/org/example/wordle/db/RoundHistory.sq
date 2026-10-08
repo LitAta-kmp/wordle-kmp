@@ -1,0 +1,24 @@
+CREATE TABLE RoundHistoryEntity (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    targetWord TEXT NOT NULL,
+    difficulty TEXT NOT NULL,
+    status TEXT NOT NULL,
+    attemptsUsed INTEGER NOT NULL,
+    playedAt INTEGER NOT NULL
+);
+
+insertRound:
+INSERT INTO RoundHistoryEntity(targetWord, difficulty, status, attemptsUsed, playedAt)
+VALUES (?, ?, ?, ?, ?);
+
+selectAllRounds:
+SELECT * FROM RoundHistoryEntity ORDER BY playedAt DESC;
+
+selectRoundsByDifficulty:
+SELECT * FROM RoundHistoryEntity
+WHERE difficulty = ?
+ORDER BY playedAt DESC;
+
+countWinsByDifficulty:
+SELECT COUNT(*) FROM RoundHistoryEntity
+WHERE difficulty = ? AND status = 'WON';
